@@ -9,3 +9,14 @@ C:\Users\lucas\source\repos\BezierCurves\BezierCurves\bin\Debug\BezierCurves.pdb
 C:\Users\lucas\source\repos\BezierCurves\BezierCurves\obj\Debug\BezierCurves.exe
 C:\Users\lucas\source\repos\BezierCurves\BezierCurves\obj\Debug\BezierCurves.pdb
 C:\Users\lucas\source\repos\BezierCurves\BezierCurves\obj\Debug\BezierCurves.exe.config
+C:\Users\lucas\Documents\GitHub\UEMG\BezierCurves\BezierCurves\bin\Debug\BezierCurves.exe.config
+C:\Users\lucas\Documents\GitHub\UEMG\BezierCurves\BezierCurves\bin\Debug\BezierCurves.exe
+C:\Users\lucas\Documents\GitHub\UEMG\BezierCurves\BezierCurves\bin\Debug\BezierCurves.pdb
+C:\Users\lucas\Documents\GitHub\UEMG\BezierCurves\BezierCurves\obj\Debug\BezierCurves.csproj.AssemblyReference.cache
+C:\Users\lucas\Documents\GitHub\UEMG\BezierCurves\BezierCurves\obj\Debug\BezierCurves.exe.config
+C:\Users\lucas\Documents\GitHub\UEMG\BezierCurves\BezierCurves\obj\Debug\BezierCurves.Form1.resources
+C:\Users\lucas\Documents\GitHub\UEMG\BezierCurves\BezierCurves\obj\Debug\BezierCurves.Properties.Resources.resources
+C:\Users\lucas\Documents\GitHub\UEMG\BezierCurves\BezierCurves\obj\Debug\BezierCurves.csproj.GenerateResource.cache
+C:\Users\lucas\Documents\GitHub\UEMG\BezierCurves\BezierCurves\obj\Debug\BezierCurves.csproj.CoreCompileInputs.cache
+C:\Users\lucas\Documents\GitHub\UEMG\BezierCurves\BezierCurves\obj\Debug\BezierCurves.exe
+C:\Users\lucas\Documents\GitHub\UEMG\BezierCurves\BezierCurves\obj\Debug\BezierCurves.pdb

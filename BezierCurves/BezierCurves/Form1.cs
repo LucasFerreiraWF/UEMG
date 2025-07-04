@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace BezierCurves
 {
@@ -9,9 +10,10 @@ namespace BezierCurves
     {
         private DateTime startTime = DateTime.Now;
         private float animationDuration = 2f;
+        Random rand = new Random();
 
         private Pen bluePen = new Pen(Color.Blue, 2);
-        private Pen redPen = new Pen(Color.Red, 1);
+        private Pen Pen = new Pen(Color.Red, 1);
         private float Progress = 0f;
         private bool construct = true;
         private bool ShowAnchors = true;
@@ -90,7 +92,9 @@ namespace BezierCurves
 
                 if (i < Points.Length - 1)
                 {
-                    if (ShowAnchors) g.DrawLine(redPen, Points[i], Points[i + 1]);
+                    Color randomColor = Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
+                    Pen.Color = randomColor;
+                    if (ShowAnchors) g.DrawLine(Pen, Points[i], Points[i + 1]);
                     Point p = LerpPoint(Points[i], Points[i + 1], t);
                     nextPoints[i] = p;
                 }
