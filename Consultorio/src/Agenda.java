@@ -93,4 +93,20 @@ public class Agenda { // Define a classe Agenda, o molde para criar objetos que 
         }
         return consultas_data;
     }
+
+    //Método toString para exibir as consultas
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("AGENDA DE CONSULTAS:\n");
+
+        if (consultas.isEmpty()) {
+            sb.append("Nenhuma consulta cadastrada.\n");
+        } else {
+            for (Consulta c : consultas) {
+                sb.append(c.toString()).append("\n");
+            }
+        }
+        return sb.toString();
+    }
 }
