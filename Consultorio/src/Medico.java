@@ -1,33 +1,31 @@
-//ConsultarHistorico() Somente o main tem acesso à agenda para poder filtrar e ver as consultas do médico
-
+//ListarConsultas() Somente o main tem acesso à agenda para poder filtrar e ver as consultas do médico
 
 import java.util.ArrayList;
 import java.util.Scanner;
 //Importacao para print e criacao de listas
 
-//Paciente herda da classe pessoa, tendo acesso a tudo que esta como publico ou protegido
-public class Paciente extends Pessoa
+//Medico herda da classe pessoa, tendo acesso a tudo que esta como publico ou protegido
+public class Medico extends Pessoa 
 {
-    //atributos privados exceto pelo Id, que nao e uma informacao sensivel e pode ser acessada externamente
-    public int id;
-    private String tipoSanguineo;
-    private ArrayList<String> alergias;
-    private boolean ativo;
+    // atributos privados exceto pelo Id, que nao e uma informacao sensivel e pode
+    // ser acessada externamente
+    private String especialidade;
+    private String crm;
+    private ArrayList<String> diasAtendimento;
 
-    public Paciente(int id, String tipoSanguineo, String nome, int cpf, String endereco, String email, String dataNascimento)
+    public Medico(String especialidade, String crm, String nome, int cpf, String endereco, String email,String dataNascimento) 
     {
         super(nome, cpf, endereco, email, dataNascimento);
-        this.id = id;
-        this.tipoSanguineo = tipoSanguineo;
-        this.alergias = new ArrayList<>();
-        ativo = true;
+        this.especialidade = especialidade;
+        this.crm = crm;
+        this.diasAtendimento = new ArrayList<>();
     }
 
-    public void exibirDados()
+    public void exibirDados() 
     {
-        System.out.println(String.format("Id: %d - [%s]", id, ativo ? "Ativo" : "Inativo"));
         super.exibirDados();
-        System.out.println(String.format("Tipo sanguineo: %s", tipoSanguineo));
+        System.out.println(String.format("Especialidade: %s", especialidade));
+        System.out.println(String.format("Crm: %s", crm));
     }
 
     public void atualizarDados() 
@@ -44,8 +42,8 @@ public class Paciente extends Pessoa
             System.out.println("2. Endereço");
             System.out.println("3. E-mail");
             System.out.println("4. Data de Nascimento");
-            System.out.println("5. Tipo sanguineo");
-            System.out.println("6. Ativar/Desativar paciente");
+            System.out.println("5. Especialidade");
+            System.out.println("6. CRM");
             System.out.println("0. Sair da Atualização");
             System.out.print("Opção: ");
 
@@ -77,14 +75,16 @@ public class Paciente extends Pessoa
                     System.out.println("Data de Nascimento atualizada com sucesso.");
                     break;
                 case 5:
-                    System.out.print("Tipo sanguineo correto: ");
-                    String tipoSanguineo = scan.nextLine();
-                    this.tipoSanguineo = tipoSanguineo;
-                    System.out.println("Tipo sanguineo atualizada com sucesso.");
+                    System.out.print("Nova especialidade: ");
+                    String especialidade = scan.nextLine();
+                    this.especialidade = especialidade;
+                    System.out.println("especialidade atualizada com sucesso.");
                     break;
                 case 6:
-                    ativo = !ativo;
-                    System.out.println(String.format("[%s]", ativo ? "Ativo" : "Inativo"));
+                    System.out.print("Novo CRM: ");
+                    String crm = scan.nextLine();
+                    this.crm = crm;
+                    System.out.println("CRM atualizada com sucesso.");
                     break;
                 default:
                     break;
@@ -92,21 +92,4 @@ public class Paciente extends Pessoa
         } while (escolha != 0);
     }
 
-    public void adicionarAlergia(String alergia)
-    {
-        if (alergia == null || alergia.isEmpty())
-        {
-            System.out.println("Insira uma alergia valida.");
-            return;
-        }
-
-        if (alergias.contains(alergia))
-        {
-            System.out.println("Alergia ja adicionada.");
-            return;
-        }
-
-        alergias.add(alergia);
-        System.out.println("Alergia adicionada com sucesso");
-    }
 }
