@@ -56,7 +56,7 @@ public class Medico extends Pessoa
             System.out.println("0. Sair da Atualização");
             System.out.print("Opção: ");
 
-            escolha = scan.nextInt();
+            escolha = scan.nextInt(); scan.nextLine();
 
             switch (escolha) {
                 case 1:
@@ -100,5 +100,4 @@ public class Medico extends Pessoa
             }
         } while (escolha != 0);
     }
-
 }
