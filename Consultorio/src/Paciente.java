@@ -12,21 +12,21 @@ public class Paciente extends Pessoa
     private ArrayList<String> alergias;
     private boolean ativo;
 
-    
     //getters
-    public String getTipoSanguineo() {return tipoSanguineo;}
-    public ArrayList<String> getAlergias() {return alergias;}
-    public boolean isAtivo() {return ativo;}
+    public int getId() { return id; }
+    public String getTipoSanguineo() { return tipoSanguineo; }
+    public ArrayList<String> getAlergias() { return alergias; }
+    public boolean isAtivo() { return ativo; }
+
     //setters
-    public void setTipoSanguineo(String tipoSanguineo) {this.tipoSanguineo = tipoSanguineo; }
-    public void setAtivo(boolean ativo) {this.ativo = ativo;}
-    public void setId(int id) {this.id = id; }
+    public void setTipoSanguineo(String tipoSanguineo) { this.tipoSanguineo = tipoSanguineo; }
+    public void setAtivo(boolean ativo) { this.ativo = ativo; }
+    public void setId(int id) { this.id = id; }
 
     //Construtor da classe; define valores iniciais
     public Paciente(int id, String tipoSanguineo, String nome, int cpf, String endereco, String email, String dataNascimento)
     {
-        //Chama o construtor da classe pai
-        super(nome, cpf, endereco, email, dataNascimento);
+        super(nome, cpf, endereco, email, dataNascimento);   //Chama o construtor da classe pai
         this.id = id;
         this.tipoSanguineo = tipoSanguineo;
         this.alergias = new ArrayList<>();
@@ -39,10 +39,19 @@ public class Paciente extends Pessoa
         System.out.println(String.format("Id: %d - [%s]", id, ativo ? "Ativo" : "Inativo"));
         super.exibirDados();
         System.out.println(String.format("Tipo sanguineo: %s", tipoSanguineo));
+
+        if (alergias.isEmpty()) {
+            System.out.println("Alergias: Nenhuma cadastrada");
+        } else {
+            System.out.println("Alergias:");
+            for (String a : alergias) {
+                System.out.println(" - " + a);
+            }
+        }
     }
 
     //Exibe menu para atualizar os dados do objeto
-    public void atualizarDados() 
+    public void atualizarDados()
     {
         Scanner scan = new Scanner(System.in);
         int escolha;
@@ -51,56 +60,58 @@ public class Paciente extends Pessoa
         {
             this.exibirDados();
             System.out.println("------ Atualizar Dados ------");
-            System.out.println("Escolha o dado para atualizar:");
             System.out.println("1. Nome");
             System.out.println("2. Endereço");
             System.out.println("3. E-mail");
             System.out.println("4. Data de Nascimento");
             System.out.println("5. Tipo sanguineo");
             System.out.println("6. Ativar/Desativar paciente");
+            System.out.println("7. Adicionar alergia");
             System.out.println("0. Sair da Atualização");
             System.out.print("Opção: ");
 
-            escolha = scan.nextInt();
+            escolha = scan.nextInt(); scan.nextLine();
 
             switch (escolha) {
                 case 1:
                     System.out.print("Novo Nome: ");
-                    String nome = scan.nextLine();
-                    setNome(nome);
-                    System.out.println("Nome atualizado com sucesso.");
+                    setNome(scan.nextLine());
                     break;
+
                 case 2:
                     System.out.print("Novo Endereço: ");
-                    String endereco = scan.nextLine();
-                    setEndereco(endereco);
-                    System.out.println("Endereço atualizado com sucesso.");
+                    setEndereco(scan.nextLine());
                     break;
+
                 case 3:
                     System.out.print("Novo E-mail: ");
-                    String email = scan.nextLine();
-                    setEmail(email);
-                    System.out.println("E-mail atualizado com sucesso.");
+                    setEmail(scan.nextLine());
                     break;
+
                 case 4:
                     System.out.print("Nova Data de Nascimento (dd/mm/aaaa): ");
-                    String dataNasc = scan.nextLine();
-                    setDataNascimento(dataNasc);
-                    System.out.println("Data de Nascimento atualizada com sucesso.");
+                    setDataNascimento(scan.nextLine());
                     break;
+
                 case 5:
                     System.out.print("Tipo sanguineo correto: ");
-                    String tipoSanguineo = scan.nextLine();
-                    this.tipoSanguineo = tipoSanguineo;
-                    System.out.println("Tipo sanguineo atualizada com sucesso.");
+                    setTipoSanguineo(scan.nextLine());
                     break;
+
                 case 6:
                     ativo = !ativo;
                     System.out.println(String.format("[%s]", ativo ? "Ativo" : "Inativo"));
                     break;
+
+                case 7:
+                    System.out.print("Digite a alergia: ");
+                    adicionarAlergia(scan.nextLine());
+                    break;
+
                 default:
                     break;
             }
+
         } while (escolha != 0);
     }
 
@@ -123,3 +134,4 @@ public class Paciente extends Pessoa
         System.out.println("Alergia adicionada com sucesso");
     }
 }
+
