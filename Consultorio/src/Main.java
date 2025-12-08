@@ -65,7 +65,8 @@ public class Main {
                         System.out.println("Alergia " + (i+1) + ":"); 
                         alergias.add(sc.nextLine());
                     }
-                    Paciente p = new Paciente(idPaciente++, tipoSangue, nome, cpf, endereco, email, dataNasc, alergias);
+                    Paciente p = new Paciente(idPaciente++, tipoSangue, nome, cpf, endereco, email, dataNasc);
+                    for(String al : alergias) p.adicionarAlergia(al);
                     pacientes.add(p);
                     System.out.println("Paciente cadastrado com sucesso!");
                     break;
@@ -79,7 +80,7 @@ public class Main {
                 case 3: //Atualizar
                     Paciente pacAtualizar = escolherPaciente();
                     if(pacAtualizar != null) {
-                        pacAtualizar.atualizarDados(sc);
+                        pacAtualizar.atualizarDados();
                         System.out.println("Paciente atualizado com sucesso!");
                     } else System.out.println("Paciente não encontrado.");
                     break;
@@ -121,7 +122,7 @@ public class Main {
                 case 3: //Atualizar
                     Medico medAtualizar = escolherMedico();
                     if(medAtualizar != null) {
-                        medAtualizar.atualizarDados(sc);
+                        medAtualizar.atualizarDados();
                         System.out.println("Médico atualizado com sucesso!");
                     } else System.out.println("Médico não encontrado.");
                     break;
@@ -176,7 +177,10 @@ public class Main {
                     if(pacRem != null) {
                         List<Consulta> consPac = agenda.buscarConsultasPorpaciente(pacRem);
                         if(consPac.isEmpty()) { System.out.println("Nenhuma consulta encontrada."); break; }
-                        for(int i = 0; i < consPac.size(); i++) System.out.println(i + " - " + consPac.get(i).getDetalhes());
+                        for(int i = 0; i < consPac.size(); i++) {
+                            System.out.println(i + " - ");
+                            consPac.get(i).imprimirConsulta();
+                        }
                         System.out.println("Selecione a consulta pelo número:"); int idx = sc.nextInt(); sc.nextLine();
                         if(idx >= 0 && idx < consPac.size()) {
                             System.out.println("Nova data:"); String novaData = sc.nextLine();
@@ -192,7 +196,10 @@ public class Main {
                     if(pacStatus != null) {
                         List<Consulta> consPac = agenda.buscarConsultasPorpaciente(pacStatus);
                         if(consPac.isEmpty()) { System.out.println("Nenhuma consulta encontrada."); break; }
-                        for(int i = 0; i < consPac.size(); i++) System.out.println(i + " - " + consPac.get(i).getDetalhes());
+                        for(int i = 0; i < consPac.size(); i++) {
+                            System.out.println(i + " - ");
+                            consPac.get(i).imprimirConsulta();
+                        }
                         System.out.println("Selecione a consulta pelo número:"); int idx = sc.nextInt(); sc.nextLine();
                         if(idx >= 0 && idx < consPac.size()) {
                             System.out.println("Novo status (Agendada / Cancelada / Realizada):");
@@ -223,7 +230,7 @@ public class Main {
         System.out.println("\n--- Relatório ---");
         System.out.println("Total de Pacientes: " + pacientes.size());
         System.out.println("Total de Médicos: " + medicos.size());
-        System.out.println("Total de Consultas: " + agenda.totalConsultas());
+        System.out.println("Total de Consultas: " + agenda.buscarConsultasPorData("").size());
     }
 
     //Salvamentos
@@ -238,6 +245,7 @@ public class Main {
         } catch(Exception e) { System.out.println("Erro: " + e.getMessage()); }
     }
 
+    @SuppressWarnings("unchecked")
     public static void carregarDados() {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream("dados_clinica.dat"));
@@ -253,9 +261,9 @@ public class Main {
     //Metodos auxiliares
     private static Paciente escolherPaciente() {
         System.out.println("Selecione o paciente (ID):");
-        for(Paciente px : pacientes) System.out.println(px.getId() + " - " + px.getNome());
+        for(Paciente px : pacientes) System.out.println(px.id + " - " + px.getNome());
         int id = sc.nextInt(); sc.nextLine();
-        for(Paciente px : pacientes) if(px.getId() == id) return px;
+        for(Paciente px : pacientes) if(px.id == id) return px;
         System.out.println("Paciente não encontrado.");
         return null;
     }
@@ -271,7 +279,7 @@ public class Main {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(p.getNome() + "_historico.txt"));
             writer.write("Histórico de Consultas do paciente: " + p.getNome() + "\n\n");
-            for(Consulta c : consultas) writer.write(c.getDetalhes() + "\n");
+            for(Consulta c : consultas) c.imprimirConsulta();
             writer.close();
         } catch(IOException e) { System.out.println("Erro ao salvar arquivo: " + e.getMessage()); }
     }
