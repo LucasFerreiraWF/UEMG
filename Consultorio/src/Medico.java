@@ -1,26 +1,34 @@
-//ListarConsultas() Somente o main tem acesso à agenda para poder filtrar e ver as consultas do médico
-
 import java.util.ArrayList;
 import java.util.Scanner;
 //Importacao para print e criacao de listas
 
-//Medico herda da classe pessoa, tendo acesso a tudo que esta como publico ou protegido
+//Medico herda da classe pessoa (Herança)
 public class Medico extends Pessoa 
 {
-    // atributos privados exceto pelo Id, que nao e uma informacao sensivel e pode
-    // ser acessada externamente
+    //Atributos privados que podem ser acessados por meio de getters e setters (Encapsulamento)
     private String especialidade;
     private String crm;
     private ArrayList<String> diasAtendimento;
+    
+    //getters
+    public String getEspecialidade() {return especialidade;}
+    public String getCrm() {return crm;}
+    public ArrayList<String> getDiasAtendimento() {return diasAtendimento;}
+    //setters
+    public void setEspecialidade(String especialidade) {this.especialidade = especialidade;}
+    public void setCrm(String crm) { this.crm = crm; }
 
+    //Construtor da classe
     public Medico(String especialidade, String crm, String nome, int cpf, String endereco, String email,String dataNascimento) 
     {
+        //Chama o construtor da super classe
         super(nome, cpf, endereco, email, dataNascimento);
         this.especialidade = especialidade;
         this.crm = crm;
         this.diasAtendimento = new ArrayList<>();
     }
 
+    //Exibe os dados do objeto
     public void exibirDados() 
     {
         super.exibirDados();
@@ -28,6 +36,7 @@ public class Medico extends Pessoa
         System.out.println(String.format("Crm: %s", crm));
     }
 
+    //Mostra um menu para atualizar os dados do objeto
     public void atualizarDados() 
     {
         Scanner scan = new Scanner(System.in);

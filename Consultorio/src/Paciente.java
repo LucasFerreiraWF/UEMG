@@ -1,21 +1,31 @@
-//ConsultarHistorico() Somente o main tem acesso à agenda para poder filtrar e ver as consultas do médico
-
-
 import java.util.ArrayList;
 import java.util.Scanner;
 //Importacao para print e criacao de listas
 
-//Paciente herda da classe pessoa, tendo acesso a tudo que esta como publico ou protegido
+//Paciente herda da classe pessoa(Herança)
 public class Paciente extends Pessoa
 {
     //atributos privados exceto pelo Id, que nao e uma informacao sensivel e pode ser acessada externamente
+    //Encapsulamento
     public int id;
     private String tipoSanguineo;
     private ArrayList<String> alergias;
     private boolean ativo;
 
+    
+    //getters
+    public String getTipoSanguineo() {return tipoSanguineo;}
+    public ArrayList<String> getAlergias() {return alergias;}
+    public boolean isAtivo() {return ativo;}
+    //setters
+    public void setTipoSanguineo(String tipoSanguineo) {this.tipoSanguineo = tipoSanguineo; }
+    public void setAtivo(boolean ativo) {this.ativo = ativo;}
+    public void setId(int id) {this.id = id; }
+
+    //Construtor da classe; define valores iniciais
     public Paciente(int id, String tipoSanguineo, String nome, int cpf, String endereco, String email, String dataNascimento)
     {
+        //Chama o construtor da classe pai
         super(nome, cpf, endereco, email, dataNascimento);
         this.id = id;
         this.tipoSanguineo = tipoSanguineo;
@@ -23,6 +33,7 @@ public class Paciente extends Pessoa
         ativo = true;
     }
 
+    //Printa os dados privados da classe
     public void exibirDados()
     {
         System.out.println(String.format("Id: %d - [%s]", id, ativo ? "Ativo" : "Inativo"));
@@ -30,6 +41,7 @@ public class Paciente extends Pessoa
         System.out.println(String.format("Tipo sanguineo: %s", tipoSanguineo));
     }
 
+    //Exibe menu para atualizar os dados do objeto
     public void atualizarDados() 
     {
         Scanner scan = new Scanner(System.in);
@@ -92,6 +104,7 @@ public class Paciente extends Pessoa
         } while (escolha != 0);
     }
 
+    //Adiciona uma nova alergia a lista
     public void adicionarAlergia(String alergia)
     {
         if (alergia == null || alergia.isEmpty())
