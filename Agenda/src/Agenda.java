@@ -81,6 +81,17 @@ public class Agenda implements InterfaceAgenda{
                 case 2 :
                     {
                         System.out.println("Atualizar Paciente: ");
+                        Paciente paciente = new Paciente();
+
+                        System.out.println("Nome: ");
+                        String nome = scan.next();
+
+                        paciente.setNome(nome);
+
+                        System.out.println("CPF: ");
+                        int cpf = Integer.parseInt(scan.next());
+
+                        paciente.setCpf(cpf);
 
                         System.out.println("Data de nascimento: ");
                         System.out.println("Dia: ");
@@ -95,12 +106,73 @@ public class Agenda implements InterfaceAgenda{
                         data.setMes(mes);
                         data.setAno(ano);
 
-                        Paciente paciente = new Paciente();
                         paciente.setDataNascimento(data);
+
+                        System.out.println("Plano de saude: ");
+                        String plano = scan.next();
+
+                        paciente.setPlanoSaude(plano);
+
+                        System.out.println("Sexo: ");
+                        String sexo = scan.next();
+
+                        paciente.setSexo(sexo);
+
                         break;
                     }
-                default:
-                    throw new AssertionError();
+                     case 3 :
+                    {
+                        System.out.println("Atualizar Profissional: ");
+                        Profissional profissional = new Profissional();
+
+                        System.out.println("Nome: ");
+                        String nome = scan.next();
+
+                        profissional.setNome(nome);
+
+                        System.out.println("CPF: ");
+                        int cpf = Integer.parseInt(scan.next());
+
+                        profissional.setCpf(cpf);
+
+                        System.out.println("Especialidade: ");
+                        String especialidade = scan.next();
+
+                        profissional.setEspecialidade(especialidade);
+
+                        System.out.println("Titulacao: ");
+                        String titulacao = scan.next();
+
+                        profissional.setTitulacao(titulacao);
+
+                        break;
+                    }
+                    case 4 :
+                    {
+                        System.out.println("Novo horario: ");
+                        String horario = scan.next();
+                        consulta.setHorario(horario);
+                        break;
+                    }
+                    case 5 :
+                    {
+                        System.out.println("Registrar sintomas: ");
+                        String sintomas = scan.next();
+                        consulta.setDescricaoSintoma(sintomas);
+                        break;
+                    }
+                    case 6 :
+                    {
+                        System.out.println("Adicionar prescricao: ");
+                        String prescricao = scan.next();
+                        consulta.setPrescricao(prescricao);
+                        break;
+                    }
+                    default:
+                    {
+                        System.out.println("\n\nErro! Opção invalida!\n\n");
+                        return;
+                    }
             }
 
         }while(option >= 0);
@@ -109,7 +181,7 @@ public class Agenda implements InterfaceAgenda{
     }
 
     @Override
-    public void imprimirTodos() {
+    public void imprimirTodas() {
         System.out.println("Imprimindo agenda...\n\n");
 
         for(Consulta c : agendaMedica) 
@@ -132,11 +204,20 @@ public class Agenda implements InterfaceAgenda{
             return;
         }
 
+        Paciente paciente = consulta.getPaciente();
+        Profissional profissional = consulta.getEspecialista();
+
+        if (paciente == null || profissional == null)
+        {
+            System.out.println("Consulta Invalida! Paciente e/ou profissional nulo!");
+            return;
+        }
+
         System.out.println("\n-----------------------");
-        String paciente = consulta.getPaciente().getNome();
-        String profissional = consulta.getEspecialista().getNome();
-        String data = String.format("{0}/{1}/{2}", consulta.getData().getDia(), consulta.getData().getMes(), consulta.getData().getAno());
-        System.out.println(String.format("\nData: {0} \nPaciente: {1} \nEspecialista: {2} ", data, paciente, profissional));
+        String pacienteNome = paciente.getNome();
+        String profissionalNome = profissional.getNome();
+        String data = String.format("%02d/%s/%04d", consulta.getData().getDia(), consulta.getData().getMes(), consulta.getData().getAno());
+        System.out.println(String.format("\nData: %s \nPaciente: %s \nEspecialista: %s ", data, pacienteNome, profissionalNome));
         if (consulta.getHorario() != "")
             System.out.println("Horario: " + consulta.getHorario());
         if (consulta.getDescricaoSintoma() != "")
