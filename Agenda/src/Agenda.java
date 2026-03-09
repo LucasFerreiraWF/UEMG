@@ -43,32 +43,35 @@ public class Agenda implements InterfaceAgenda{
         do{
             System.out.println("...");
             System.out.println("O que deseja editar?");
-            System.out.println("[0] Codigo");
-            System.out.println("[1] Data");
-            System.out.println("[2] Paciente");
-            System.out.println("[3] Profissional");
-            System.out.println("[4] Horario");
-            System.out.println("[5] Descricao dos Sintomas");
-            System.out.println("[6] Prescricao");
+            System.out.println("[1] Codigo");
+            System.out.println("[2] Data");
+            System.out.println("[3] Paciente");
+            System.out.println("[4] Profissional");
+            System.out.println("[5] Horario");
+            System.out.println("[6] Descricao dos Sintomas");
+            System.out.println("[7] Prescricao");
+            System.out.println("[0] SAIR");
 
             System.out.println("\nOpcão:");
-            option = Integer.parseInt(scan.next());
+            option = Integer.parseInt(scan.nextLine());
 
             switch (option) {
-                case 0 :
+                case 0:
+                    return;
+                case 1 :
                     System.out.println("Novo codigo: ");
-                    int cod = Integer.parseInt(scan.next());
+                    int cod = Integer.parseInt(scan.nextLine());
                     consulta.setCodigo(cod);
                 break;
-                case 1 :
+                case 2 :
                     {
                         System.out.println("Atualizar data: ");
                         System.out.println("Dia: ");
-                        int dia = Integer.parseInt(scan.next());
+                        int dia = Integer.parseInt(scan.nextLine());
                         System.out.println("Mes: ");
-                        String mes = scan.next();
+                        String mes = scan.nextLine();
                         System.out.println("Ano: ");
-                        int ano = Integer.parseInt(scan.next());
+                        int ano = Integer.parseInt(scan.nextLine());
                         
                         Data novaData = new Data();
                         novaData.setDia(dia);
@@ -78,28 +81,28 @@ public class Agenda implements InterfaceAgenda{
                         consulta.setData(novaData);
                     break;
                     }
-                case 2 :
+                case 3 :
                     {
                         System.out.println("Atualizar Paciente: ");
                         Paciente paciente = new Paciente();
 
                         System.out.println("Nome: ");
-                        String nome = scan.next();
+                        String nome = scan.nextLine();
 
                         paciente.setNome(nome);
 
                         System.out.println("CPF: ");
-                        int cpf = Integer.parseInt(scan.next());
+                        int cpf = Integer.parseInt(scan.nextLine());
 
                         paciente.setCpf(cpf);
 
                         System.out.println("Data de nascimento: ");
                         System.out.println("Dia: ");
-                        int dia = Integer.parseInt(scan.next());
+                        int dia = Integer.parseInt(scan.nextLine());
                         System.out.println("Mes: ");
-                        String mes = scan.next();
+                        String mes = scan.nextLine();
                         System.out.println("Ano: ");
-                        int ano = Integer.parseInt(scan.next());
+                        int ano = Integer.parseInt(scan.nextLine());
 
                         Data data = new Data();
                         data.setDia(dia);
@@ -109,66 +112,66 @@ public class Agenda implements InterfaceAgenda{
                         paciente.setDataNascimento(data);
 
                         System.out.println("Plano de saude: ");
-                        String plano = scan.next();
+                        String plano = scan.nextLine();
 
                         paciente.setPlanoSaude(plano);
 
                         System.out.println("Sexo: ");
-                        String sexo = scan.next();
+                        String sexo = scan.nextLine();
 
                         paciente.setSexo(sexo);
 
                         break;
                     }
-                     case 3 :
+                case 4 :
                     {
                         System.out.println("Atualizar Profissional: ");
                         Profissional profissional = new Profissional();
 
                         System.out.println("Nome: ");
-                        String nome = scan.next();
+                        String nome = scan.nextLine();
 
                         profissional.setNome(nome);
 
                         System.out.println("CPF: ");
-                        int cpf = Integer.parseInt(scan.next());
+                        int cpf = Integer.parseInt(scan.nextLine());
 
                         profissional.setCpf(cpf);
 
                         System.out.println("Especialidade: ");
-                        String especialidade = scan.next();
+                        String especialidade = scan.nextLine();
 
                         profissional.setEspecialidade(especialidade);
 
                         System.out.println("Titulacao: ");
-                        String titulacao = scan.next();
+                        String titulacao = scan.nextLine();
 
                         profissional.setTitulacao(titulacao);
 
                         break;
                     }
-                    case 4 :
+                case 5 :
                     {
                         System.out.println("Novo horario: ");
-                        String horario = scan.next();
+                        String horario = scan.nextLine();
                         consulta.setHorario(horario);
                         break;
                     }
-                    case 5 :
+                case 6 :
                     {
                         System.out.println("Registrar sintomas: ");
-                        String sintomas = scan.next();
+                        String sintomas = scan.nextLine();
                         consulta.setDescricaoSintoma(sintomas);
                         break;
                     }
-                    case 6 :
+                case 7 :
                     {
                         System.out.println("Adicionar prescricao: ");
-                        String prescricao = scan.next();
+                        String prescricao = scan.nextLine();
                         consulta.setPrescricao(prescricao);
                         break;
                     }
-                    default:
+                default:
                     {
                         System.out.println("\n\nErro! Opção invalida!\n\n");
                         return;
@@ -182,7 +185,7 @@ public class Agenda implements InterfaceAgenda{
 
     @Override
     public void imprimirTodas() {
-        System.out.println("Imprimindo agenda...\n\n");
+        System.out.println("\nImprimindo agenda...");
 
         for(Consulta c : agendaMedica) 
             imprimirConsulta(c.getCodigo());
@@ -214,6 +217,7 @@ public class Agenda implements InterfaceAgenda{
         }
 
         System.out.println("\n-----------------------");
+        System.out.println("Codigo: " + consulta.getCodigo());
         String pacienteNome = paciente.getNome();
         String profissionalNome = profissional.getNome();
         String data = String.format("%02d/%s/%04d", consulta.getData().getDia(), consulta.getData().getMes(), consulta.getData().getAno());
